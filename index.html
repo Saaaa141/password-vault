@@ -19,6 +19,7 @@ body{background:#05070d;display:flex;justify-content:center;align-items:center}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fingerPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(99,102,241,.5)}50%{transform:scale(1.03);box-shadow:0 0 0 18px rgba(99,102,241,0)}}
+@keyframes pwdIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .app{position:relative;max-width:440px;width:100%;height:100%;background:var(--bg);color:var(--txt-1);display:flex;flex-direction:column;overflow:hidden;transition:background .3s,color .3s;z-index:1}
 .app::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:40px 40px;-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 70%)}
 .topbar{padding:18px 20px 10px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;position:relative;z-index:3}
@@ -310,44 +311,30 @@ body{background:#05070d;display:flex;justify-content:center;align-items:center}
 .trash-del{background:rgba(244,63,94,.15);color:#fda4af}
 .trash-empty{padding:40px 20px;text-align:center;font-size:.82rem;color:var(--txt-3)}
 /* ========== 锁屏 ========== */
-.lock-screen{position:fixed;inset:0;z-index:500;background:#05070d;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;transition:opacity .4s}
+.lock-screen{position:fixed;inset:0;z-index:500;background:#05070d;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;transition:opacity .4s;cursor:pointer}
 .lock-screen.hidden{opacity:0;pointer-events:none}
 .lock-content{width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;text-align:center}
 .lock-icon{width:80px;height:80px;border-radius:24px;background:linear-gradient(145deg,rgba(99,102,241,.22),rgba(139,92,246,.08));border:1px solid rgba(139,92,246,.3);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 20px 50px -20px rgba(99,102,241,.5)}
 .lock-icon svg{width:36px;height:36px;stroke:#a5b4fc;fill:none;stroke-width:1.8}
 .lock-title{font-size:1.4rem;font-weight:800;margin-bottom:6px;color:#f1f5f9;letter-spacing:-.5px}
 .lock-sub{font-size:.78rem;color:#64748b;margin-bottom:22px;line-height:1.5}
-.lock-input{width:100%;background:#121826;border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:14px 16px;color:#f1f5f9;font-size:.92rem;outline:none;text-align:center;letter-spacing:3px;font-weight:600;margin-bottom:10px;font-family:inherit}
+.lock-input{width:100%;background:#121826;border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:14px 16px;color:#f1f5f9;font-size:.92rem;outline:none;text-align:center;letter-spacing:3px;font-weight:600;margin-bottom:10px;font-family:inherit;cursor:text}
 .lock-input:focus{border-color:rgba(99,102,241,.6)}
 .lock-input::placeholder{letter-spacing:.5px;font-weight:450;color:#475569}
-.lock-btn{width:100%;padding:15px;border:none;border-radius:13px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit}
-.lock-forgot{margin-top:16px;font-size:.74rem;color:#475569;cursor:pointer;padding:7px}
+.lock-btn{width:100%;padding:15px;border:none;border-radius:13px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit;cursor:pointer}
+.lock-forgot{margin-top:16px;font-size:.74rem;color:#475569;cursor:pointer;padding:7px;cursor:pointer}
 .lock-error{font-size:.72rem;color:#f43f5e;margin-bottom:9px;min-height:15px}
-/* 指纹按钮 */
-.bio-btn{
-  width:88px;height:88px;border-radius:50%;border:none;
-  background:linear-gradient(145deg,rgba(99,102,241,.22),rgba(139,92,246,.1));
-  border:1px solid rgba(139,92,246,.4);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
-  transition:transform .15s;
-  box-shadow:0 16px 40px -12px rgba(99,102,241,.5),inset 0 1px 0 rgba(255,255,255,.1);
-}
+.bio-btn{width:96px;height:96px;border-radius:50%;border:none;background:linear-gradient(145deg,rgba(99,102,241,.22),rgba(139,92,246,.1));border:1px solid rgba(139,92,246,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;margin-bottom:16px;transition:transform .15s;box-shadow:0 16px 40px -12px rgba(99,102,241,.5),inset 0 1px 0 rgba(255,255,255,.1);cursor:pointer}
 .bio-btn:active{transform:scale(.94)}
-.bio-btn svg{width:44px;height:44px;stroke:#a5b4fc;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.bio-btn svg{width:48px;height:48px;stroke:#a5b4fc;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .bio-btn.loading svg{animation:fingerPulse 1s ease-in-out infinite;stroke:#8b5cf6}
 .bio-btn.error{border-color:rgba(244,63,94,.4);background:linear-gradient(145deg,rgba(244,63,94,.15),rgba(244,63,94,.05))}
 .bio-btn.error svg{stroke:#f87171}
 .bio-hint{font-size:.76rem;color:#64748b;margin-bottom:14px;min-height:18px}
 .bio-hint.error{color:#f87171}
-.pwd-toggle-link{
-  margin-top:6px;font-size:.78rem;color:#64748b;cursor:pointer;
-  padding:10px 16px;border-radius:10px;transition:color .15s;user-select:none;
-  display:flex;align-items:center;gap:6px;
-}
+.pwd-toggle-link{margin-top:6px;font-size:.78rem;color:#64748b;cursor:pointer;padding:10px 16px;border-radius:10px;transition:color .15s;user-select:none;display:flex;align-items:center;gap:6px;cursor:pointer}
 .pwd-toggle-link:active{color:#a5b4fc}
 .pwd-toggle-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
-.pwd-form{width:100%;display:flex;flex-direction:column;gap:8px;animation:pwdIn .3s ease}
-@keyframes pwdIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .toast{position:fixed;left:50%;bottom:110px;transform:translate(-50%,20px);background:rgba(30,38,58,.97);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:11px 19px;font-size:.8rem;font-weight:550;color:#f1f5f9;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:800;white-space:nowrap;max-width:90vw;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .confirm{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.92);width:calc(100% - 44px);max-width:320px;z-index:700;background:var(--bg);border:1px solid var(--border);border-radius:19px;padding:22px 20px;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 20px 60px rgba(0,0,0,.5);color:var(--txt-1)}
@@ -534,37 +521,30 @@ var store={
 };
 var hasCrypto=!!(window.crypto&&window.crypto.subtle);
 
-/* ========== WebAuthn 指纹支持检测 ========== */
-var webauthnSupported=false;
-var platformAuthAvailable=false;
+/* ========== WebAuthn ========== */
+var bioDiag={ok:false,reason:''};
 try{
-  webauthnSupported=!!(window.PublicKeyCredential&&navigator.credentials&&navigator.credentials.create&&navigator.credentials.get);
-}catch(e){webauthnSupported=false;}
-
-// 环境诊断：用于设置页展示
-function diagnoseWebAuthn(){
   if(!window.isSecureContext){
-    return {ok:false,reason:'需要 HTTPS 环境（当前页面不是安全上下文）'};
+    bioDiag={ok:false,reason:'需要 HTTPS 环境（当前不是安全上下文）'};
+  }else if(!window.PublicKeyCredential){
+    bioDiag={ok:false,reason:'浏览器不支持 WebAuthn'};
+  }else if(!navigator.credentials){
+    bioDiag={ok:false,reason:'浏览器不支持凭据 API'};
+  }else{
+    bioDiag={ok:true,reason:''};
   }
-  if(!window.PublicKeyCredential){
-    return {ok:false,reason:'浏览器不支持 WebAuthn'};
-  }
-  if(!navigator.credentials){
-    return {ok:false,reason:'浏览器不支持凭据 API'};
-  }
-  return {ok:true,reason:''};
-}
-var bioDiag=diagnoseWebAuthn();
+}catch(e){bioDiag={ok:false,reason:'检测失败'};}
 
-// 检测平台认证器（指纹）可用性
+var platformAuthAvailable=false;
 function checkPlatformAuth(){
-  if(!bioDiag.ok){platformAuthAvailable=false;return;}
+  if(!bioDiag.ok)return;
   try{
-    if(typeof PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable!=='function'){
-      platformAuthAvailable=false;return;
-    }
+    if(typeof PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable!=='function'){platformAuthAvailable=false;return;}
     PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().then(function(v){
       platformAuthAvailable=!!v;
+      if(!v&&state.firstSetup===false&&state.bioEnabled){
+        // 之前能用，现在不能用了
+      }
     }).catch(function(){platformAuthAvailable=false;});
   }catch(e){platformAuthAvailable=false;}
 }
@@ -652,56 +632,39 @@ function generateTOTP(secretBase32,period){
         var h=new Uint8Array(sig);
         var offset=h[h.length-1]&0x0f;
         var code=((h[offset]&0x7f)<<24)|((h[offset+1]&0xff)<<16)|((h[offset+2]&0xff)<<8)|(h[offset+3]&0xff);
-        var otp=code%1000000;
-        var str=String(otp);
-        while(str.length<6)str='0'+str;
-        return str;
+        var otp=code%1000000;var str=String(otp);while(str.length<6)str='0'+str;return str;
       }).catch(function(){return null;});
   }catch(e){return Promise.resolve(null);}
 }
 
-/* ========== AES 加密 ========== */
+/* ========== AES ========== */
 function deriveKey(password,salt){
   if(!hasCrypto)return null;
   var enc=new TextEncoder();
   return crypto.subtle.importKey('raw',enc.encode(password),{name:'PBKDF2'},false,['deriveKey'])
-    .then(function(baseKey){
-      return crypto.subtle.deriveKey(
-        {name:'PBKDF2',salt:enc.encode(salt),iterations:100000,hash:'SHA-256'},
-        baseKey,{name:'AES-GCM',length:256},false,['encrypt','decrypt']
-      );
-    });
+    .then(function(baseKey){return crypto.subtle.deriveKey({name:'PBKDF2',salt:enc.encode(salt),iterations:100000,hash:'SHA-256'},baseKey,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);});
 }
 function aesEncrypt(plaintext,password){
   if(!hasCrypto)return Promise.reject(new Error('No Web Crypto'));
-  var salt=uid()+uid();
-  var iv=crypto.getRandomValues(new Uint8Array(12));
-  return deriveKey(password,salt).then(function(key){
-    return crypto.subtle.encrypt({name:'AES-GCM',iv:iv},key,new TextEncoder().encode(plaintext));
-  }).then(function(buf){
-    var cipher=new Uint8Array(buf);
-    var saltBytes=new TextEncoder().encode(salt);
+  var salt=uid()+uid();var iv=crypto.getRandomValues(new Uint8Array(12));
+  return deriveKey(password,salt).then(function(key){return crypto.subtle.encrypt({name:'AES-GCM',iv:iv},key,new TextEncoder().encode(plaintext));}).then(function(buf){
+    var cipher=new Uint8Array(buf);var saltBytes=new TextEncoder().encode(salt);
     var combined=new Uint8Array(saltBytes.length+1+12+cipher.length);
-    combined.set(saltBytes,0);
-    combined[saltBytes.length]=saltBytes.length;
-    combined.set(iv,saltBytes.length+1);
-    combined.set(cipher,saltBytes.length+1+12);
+    combined.set(saltBytes,0);combined[saltBytes.length]=saltBytes.length;
+    combined.set(iv,saltBytes.length+1);combined.set(cipher,saltBytes.length+1+12);
     var binary='';for(var i=0;i<combined.length;i++)binary+=String.fromCharCode(combined[i]);
     return btoa(binary);
   });
 }
 function aesDecrypt(cipherB64,password){
   if(!hasCrypto)return Promise.reject(new Error('No Web Crypto'));
-  var binary=atob(cipherB64);
-  var combined=new Uint8Array(binary.length);
+  var binary=atob(cipherB64);var combined=new Uint8Array(binary.length);
   for(var i=0;i<binary.length;i++)combined[i]=binary.charCodeAt(i);
   var saltLen=combined[combined.length-1];
   var salt=new TextDecoder().decode(combined.slice(0,saltLen));
   var iv=combined.slice(saltLen+1,saltLen+13);
   var cipher=combined.slice(saltLen+13);
-  return deriveKey(password,salt).then(function(key){
-    return crypto.subtle.decrypt({name:'AES-GCM',iv:iv},key,cipher);
-  }).then(function(buf){return new TextDecoder().decode(buf);});
+  return deriveKey(password,salt).then(function(key){return crypto.subtle.decrypt({name:'AES-GCM',iv:iv},key,cipher);}).then(function(buf){return new TextDecoder().decode(buf);});
 }
 
 /* ========== 剪贴板 ========== */
@@ -711,37 +674,25 @@ function copySecure(text,cb){
   try{var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:-9999px;opacity:0';document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,ta.value.length);ok=document.execCommand('copy');document.body.removeChild(ta);}catch(e){ok=false;}
   if(!ok){try{window.prompt('请手动复制：',text);ok=true;}catch(e){ok=false;}}
   if(ok&&clipboardTimer)clearTimeout(clipboardTimer);
-  if(ok){
-    clipboardTimer=setTimeout(function(){
-      try{
-        var ta2=document.createElement('textarea');ta2.value=' ';ta2.style.cssText='position:fixed;top:-9999px;opacity:0';
-        document.body.appendChild(ta2);ta2.select();document.execCommand('copy');document.body.removeChild(ta2);
-        toast('剪贴板已自动清除');
-      }catch(e){}
-    },30000);
-  }
+  if(ok){clipboardTimer=setTimeout(function(){try{var ta2=document.createElement('textarea');ta2.value=' ';ta2.style.cssText='position:fixed;top:-9999px;opacity:0';document.body.appendChild(ta2);ta2.select();document.execCommand('copy');document.body.removeChild(ta2);toast('剪贴板已自动清除');}catch(e){}},30000);}
   cb(ok);
 }
 
-/* ========== WebAuthn 指纹核心 ========== */
+/* ========== WebAuthn 核心 ========== */
 function b64encode(buf){
-  var bytes=new Uint8Array(buf);
-  var binary='';
+  var bytes=new Uint8Array(buf);var binary='';
   for(var i=0;i<bytes.length;i++)binary+=String.fromCharCode(bytes[i]);
   return btoa(binary);
 }
 function b64decode(str){
-  var binary=atob(str);
-  var bytes=new Uint8Array(binary.length);
+  var binary=atob(str);var bytes=new Uint8Array(binary.length);
   for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
   return bytes;
 }
-
-// 注册指纹：返回 credentialId（base64）或 null
 function registerBiometric(){
   return new Promise(function(resolve){
     if(!bioDiag.ok){resolve({ok:false,reason:bioDiag.reason});return;}
-    if(!platformAuthAvailable){resolve({ok:false,reason:'当前设备未录入指纹或不支持平台认证器'});return;}
+    if(!platformAuthAvailable){resolve({ok:false,reason:'设备未录入指纹或不支持平台认证器'});return;}
     try{
       var challenge=crypto.getRandomValues(new Uint8Array(32));
       var userId=crypto.getRandomValues(new Uint8Array(16));
@@ -752,19 +703,12 @@ function registerBiometric(){
           rp:{name:'密码保险箱',id:rpId},
           user:{id:userId,name:'vault-user',displayName:'保险箱用户'},
           pubKeyCredParams:[{alg:-7,type:'public-key'},{alg:-257,type:'public-key'}],
-          authenticatorSelection:{
-            authenticatorAttachment:'platform',
-            userVerification:'required',
-            residentKey:'preferred',
-            requireResidentKey:false
-          },
-          timeout:60000,
-          attestation:'none'
+          authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required',residentKey:'preferred',requireResidentKey:false},
+          timeout:60000,attestation:'none'
         }
       }).then(function(cred){
         if(!cred){resolve({ok:false,reason:'指纹注册被取消'});return;}
-        var rawId=b64encode(cred.rawId);
-        resolve({ok:true,credId:rawId});
+        resolve({ok:true,credId:b64encode(cred.rawId)});
       }).catch(function(err){
         var msg='注册失败';
         if(err&&err.name==='NotAllowedError')msg='指纹验证被取消或超时';
@@ -776,8 +720,6 @@ function registerBiometric(){
     }catch(e){resolve({ok:false,reason:'调用指纹失败'});}
   });
 }
-
-// 验证指纹：返回 true/false
 function verifyBiometric(credIdB64){
   return new Promise(function(resolve){
     if(!bioDiag.ok){resolve({ok:false,reason:bioDiag.reason});return;}
@@ -789,8 +731,7 @@ function verifyBiometric(credIdB64){
         publicKey:{
           challenge:challenge,
           allowCredentials:[{id:allowId,type:'public-key',transports:['internal']}],
-          userVerification:'required',
-          timeout:60000
+          userVerification:'required',timeout:60000
         }
       }).then(function(assertion){
         if(!assertion){resolve({ok:false,reason:'指纹验证未通过'});return;}
@@ -807,18 +748,17 @@ function verifyBiometric(credIdB64){
 }
 
 /* ========== 常量 ========== */
-var KEY_ITEMS='pv12_items';
-var KEY_MASTER='pv12_master';
-var KEY_SETTINGS='pv12_settings';
-var KEY_TRASH='pv12_trash';
-var KEY_BIO='pv12_bio';
+var KEY_ITEMS='pv13_items';
+var KEY_MASTER='pv13_master';
+var KEY_SETTINGS='pv13_settings';
+var KEY_TRASH='pv13_trash';
+var KEY_BIO='pv13_bio';
 
 var CATS=[
   {id:'all',label:'全部'},{id:'social',label:'社交',cls:'c-social'},{id:'mail',label:'邮箱',cls:'c-mail'},
   {id:'bank',label:'银行',cls:'c-bank'},{id:'shop',label:'购物',cls:'c-shop'},{id:'work',label:'工作',cls:'c-work'},{id:'other',label:'其他',cls:'c-other'}
 ];
-var CAT_MAP={};
-for(var ci=0;ci<CATS.length;ci++)CAT_MAP[CATS[ci].id]=CATS[ci];
+var CAT_MAP={};for(var ci=0;ci<CATS.length;ci++)CAT_MAP[CATS[ci].id]=CATS[ci];
 
 var I={
   eye:'<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
@@ -847,7 +787,8 @@ var state={
   settings:{autoLockMin:5,theme:'dark',expireDays:180},
   genPwd:'',genLen:16,genOpts:{upper:true,lower:true,numbers:true,symbols:true,exclude:false},
   totpIntervals:{},
-  bioEnabled:false,bioCredId:null,showPwdForm:false
+  bioEnabled:false,bioCredId:null,
+  showPwdForm:false
 };
 function vHas(id){return state.visible[id]===true;}
 function vAdd(id){state.visible[id]=true;}
@@ -863,11 +804,8 @@ function loadAll(){
   try{
     var raw=store.get(KEY_ITEMS);var arr=raw?JSON.parse(raw):[];state.items=[];
     if(Object.prototype.toString.call(arr)==='[object Array]'){
-      for(var i=0;i<arr.length;i++){
-        var x=arr[i];
-        if(x&&x.id&&x.service){
-          state.items.push({id:x.id,service:x.service||'',user:x.user||'',pwd:x.pwd||'',cat:x.cat||'other',favorite:x.favorite===true,note:x.note||'',totp:x.totp||'',lastUsedAt:x.lastUsedAt||0,history:Object.prototype.toString.call(x.history)==='[object Array]'?x.history:[],createdAt:x.createdAt||Date.now(),updatedAt:x.updatedAt||x.createdAt||Date.now()});
-        }
+      for(var i=0;i<arr.length;i++){var x=arr[i];
+        if(x&&x.id&&x.service){state.items.push({id:x.id,service:x.service||'',user:x.user||'',pwd:x.pwd||'',cat:x.cat||'other',favorite:x.favorite===true,note:x.note||'',totp:x.totp||'',lastUsedAt:x.lastUsedAt||0,history:Object.prototype.toString.call(x.history)==='[object Array]'?x.history:[],createdAt:x.createdAt||Date.now(),updatedAt:x.updatedAt||x.createdAt||Date.now()});}
       }
     }
   }catch(e){state.items=[];}
@@ -875,30 +813,21 @@ function loadAll(){
     var rawT=store.get(KEY_TRASH);var arrT=rawT?JSON.parse(rawT):[];state.trash=[];
     if(Object.prototype.toString.call(arrT)==='[object Array]'){
       var now=Date.now();
-      for(var j=0;j<arrT.length;j++){
-        var t=arrT[j];
-        if(t&&t.id&&t.service&&t.deletedAt&&(now-t.deletedAt)<30*864e5)state.trash.push(t);
-      }
+      for(var j=0;j<arrT.length;j++){var t=arrT[j];if(t&&t.id&&t.service&&t.deletedAt&&(now-t.deletedAt)<30*864e5)state.trash.push(t);}
     }
   }catch(e){state.trash=[];}
   try{
     state.masterHash=store.get(KEY_MASTER)||null;
     var s=store.get(KEY_SETTINGS);
-    if(s){
-      var parsed=JSON.parse(s);
+    if(s){var parsed=JSON.parse(s);
       if(parsed.autoLockMin!==undefined)state.settings.autoLockMin=parsed.autoLockMin;
       if(parsed.theme)state.settings.theme=parsed.theme;
       if(parsed.expireDays!==undefined)state.settings.expireDays=parsed.expireDays;
     }
   }catch(e){}
-  // 指纹状态
   try{
     var bio=store.get(KEY_BIO);
-    if(bio){
-      var b=JSON.parse(bio);
-      state.bioEnabled=b.enabled===true;
-      state.bioCredId=b.credId||null;
-    }
+    if(bio){var b=JSON.parse(bio);state.bioEnabled=b.enabled===true;state.bioCredId=b.credId||null;}
   }catch(e){}
   state.firstSetup=!state.masterHash;
 }
@@ -911,8 +840,7 @@ function saveBio(){try{store.set(KEY_BIO,JSON.stringify({enabled:state.bioEnable
 function applyTheme(theme){
   state.settings.theme=theme;
   try{$('app').setAttribute('data-theme',theme);}catch(e){}
-  try{
-    var icon=$('themeIcon');
+  try{var icon=$('themeIcon');
     if(icon){
       if(theme==='dark')icon.innerHTML='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
       else icon.innerHTML='<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
@@ -921,117 +849,184 @@ function applyTheme(theme){
   saveSettings();
 }
 
-/* ========== 锁屏（含指纹） ========== */
+/* ========== 锁屏（核心改造区） ========== */
 function simpleHash(str){var h=5381;for(var i=0;i<str.length;i++){h=((h<<5)+h+str.charCodeAt(i))|0;}var hex=(h>>>0).toString(16);while(hex.length<8)hex='0'+hex;return hex;}
 
 function renderLock(){
-  var lt=$('lockTitle'),ls=$('lockSub'),le=$('lockErr'),lf=$('lockForm');
+  var lt=$('lockTitle'),ls=$('lockSub'),le=$('lockErr'),lf=$('lockForm'),lsc=$('lockScreen');
   if(!lt||!ls||!le||!lf)return;
   le.textContent='';
+  // 清理锁屏点击事件
+  if(lsc)lsc.onclick=null;
 
+  /* ===== 首次创建保险箱 ===== */
   if(state.firstSetup){
-    lt.textContent='创建保险箱';ls.textContent='设置主密码（至少 6 位）';
-    lf.innerHTML='<input type="password" id="lockInput1" class="lock-input" placeholder="设置主密码（至少6位）"><input type="password" id="lockInput2" class="lock-input" placeholder="再次输入确认"><button class="lock-btn" id="lockBtn">创建保险箱</button>';
+    lt.textContent='创建保险箱';
+    ls.textContent='设置主密码（至少 6 位）';
+    lf.innerHTML=
+      '<input type="password" id="lockInput1" class="lock-input" placeholder="设置主密码（至少6位）">'
+      +'<input type="password" id="lockInput2" class="lock-input" placeholder="再次输入确认">'
+      +'<button class="lock-btn" id="lockBtn">创建保险箱</button>';
     var btn1=$('lockBtn');
-    if(btn1)btn1.onclick=function(){
+    if(btn1)btn1.onclick=function(ev){
+      if(ev)ev.stopPropagation();
       var p1=$('lockInput1').value,p2=$('lockInput2').value;
       if(p1.length<6){le.textContent='主密码至少 6 位';return;}
       if(p1!==p2){le.textContent='两次输入不一致';return;}
-      var h=simpleHash(p1);store.set(KEY_MASTER,h);state.masterHash=h;state.firstSetup=false;
-      unlock();toast('保险箱已创建');
-      // 创建后引导开启指纹
-      setTimeout(function(){
-        if(bioDiag.ok){
-          askConfirm('开启指纹解锁？','下次打开可以直接用指纹解锁，无需输入主密码。',function(){
-            enableBioFromSettings();
-          });
-        }
-      },600);
+      var h=simpleHash(p1);
+      store.set(KEY_MASTER,h);
+      state.masterHash=h;state.firstSetup=false;
+      // 关键：能开指纹就自动进指纹设置引导
+      if(bioDiag.ok&&platformAuthAvailable){
+        setTimeout(showBioSetupGuide,200);
+      }else{
+        unlock();
+        toast('保险箱已创建');
+        setTimeout(function(){
+          toast(bioDiag.ok?'可在设置中开启指纹解锁':'当前环境不支持指纹，可在 HTTPS 环境下使用');
+        },1600);
+      }
     };
-    var i1=$('lockInput1');if(i1)setTimeout(function(){try{i1.focus();}catch(e){}},300);
+    var i1=$('lockInput1');
+    if(i1)setTimeout(function(){try{i1.focus();}catch(e){}},300);
+    if(i1)i1.addEventListener('click',function(ev){ev.stopPropagation();});
+    var i2=$('lockInput2');
+    if(i2)i2.addEventListener('click',function(ev){ev.stopPropagation();});
     return;
   }
 
-  // 常规解锁：指纹优先，或输入主密码
-  lt.textContent='欢迎回来';
+  /* ===== 指纹模式（默认） ===== */
   var useBio=state.bioEnabled&&state.bioCredId&&bioDiag.ok;
-  var bioHtml='';
-  if(useBio){
-    bioHtml='<button class="bio-btn" id="bioBtn" type="button">'+I.finger+'</button>'
-          +'<div class="bio-hint" id="bioHint">轻触使用指纹解锁</div>';
-    ls.textContent='使用指纹或主密码解锁';
-  }else{
-    ls.textContent='输入主密码解锁';
-  }
+  if(useBio&&!state.showPwdForm){
+    lt.textContent='轻触解锁';
+    ls.textContent='使用指纹快速打开保险箱';
+    lf.innerHTML=
+      '<button class="bio-btn" id="bioBtn" type="button">'+I.finger+'</button>'
+      +'<div class="bio-hint" id="bioHint">点击指纹图标，或轻触屏幕任意位置</div>'
+      +'<div class="pwd-toggle-link" id="pwdToggleBtn">'+I.keyboard+' 使用主密码解锁</div>';
 
-  var pwdFormHtml='<div id="pwdFormWrap" style="width:100%">'
-    +'<input type="password" id="lockInput" class="lock-input" placeholder="主密码">'
-    +'<button class="lock-btn" id="lockBtn">解锁</button>'
-    +'</div>'
-    +'<div class="lock-forgot" id="forgotBtn">忘记主密码？</div>';
-
-  var pwdToggleHtml='';
-  if(useBio){
-    pwdToggleHtml='<div class="pwd-toggle-link" id="pwdToggleBtn">'+I.keyboard+' 输入主密码</div>';
-  }
-
-  lf.innerHTML=bioHtml+pwdFormHtml+pwdToggleHtml;
-
-  // 主密码解锁逻辑
-  var btn2=$('lockBtn');
-  if(btn2)btn2.onclick=function(){
-    var p=$('lockInput').value;
-    if(simpleHash(p)===state.masterHash){unlock();}
-    else{le.textContent='主密码错误';try{$('lockInput').value='';$('lockInput').focus();}catch(e){}}
-  };
-  var li=$('lockInput');
-  if(li){
-    li.onkeydown=function(ev){if(ev.key==='Enter'){try{$('lockBtn').click();}catch(e){}}};
-    if(!useBio)setTimeout(function(){try{li.focus();}catch(e){}},300);
-  }
-
-  // 忘记密码
-  var fb=$('forgotBtn');
-  if(fb)fb.onclick=function(){
-    askConfirm('清空所有数据？','忘记主密码将无法恢复。继续将清空所有密码并重置保险箱。',function(){
-      store.remove(KEY_ITEMS);store.remove(KEY_MASTER);store.remove(KEY_TRASH);store.remove(KEY_BIO);
-      state.items=[];state.trash=[];state.masterHash=null;state.bioEnabled=false;state.bioCredId=null;state.firstSetup=true;
-      renderLock();
-    });
-  };
-
-  // 指纹按钮
-  if(useBio){
-    var bioBtn=$('bioBtn');var bioHint=$('bioHint');
+    var bioBtn=$('bioBtn'), bioHint=$('bioHint');
     var handleBio=function(){
+      if(!bioBtn)return;
       if(bioBtn.className.indexOf('loading')!==-1)return;
       bioBtn.className='bio-btn loading';
       if(bioHint){bioHint.className='bio-hint';bioHint.textContent='正在验证指纹...';}
       le.textContent='';
       verifyBiometric(state.bioCredId).then(function(res){
         if(res.ok){
-          bioBtn.className='bio-btn';
+          if(bioBtn)bioBtn.className='bio-btn';
           unlock();
         }else{
-          bioBtn.className='bio-btn error';
+          if(bioBtn)bioBtn.className='bio-btn error';
           if(bioHint){bioHint.className='bio-hint error';bioHint.textContent=res.reason||'验证失败';}
-          setTimeout(function(){bioBtn.className='bio-btn';if(bioHint){bioHint.className='bio-hint';bioHint.textContent='轻触使用指纹解锁';}},1500);
+          setTimeout(function(){
+            if(bioBtn)bioBtn.className='bio-btn';
+            if(bioHint){bioHint.className='bio-hint';bioHint.textContent='点击指纹图标，或轻触屏幕任意位置';}
+          },1600);
         }
       });
     };
-    if(bioBtn)bioBtn.onclick=handleBio;
-    // 自动触发一次（可选）
-    // setTimeout(handleBio,400);
+
+    if(bioBtn)bioBtn.onclick=function(ev){if(ev)ev.stopPropagation();handleBio();};
+
+    // 整个锁屏区域点击都触发指纹
+    if(lsc)lsc.onclick=function(ev){
+      var t=ev.target;
+      if(!t)return;
+      if(t.id==='pwdToggleBtn')return;
+      if(t===bioBtn||(bioBtn&&bioBtn.contains&&bioBtn.contains(t)))return;
+      handleBio();
+    };
 
     var pt=$('pwdToggleBtn');
-    if(pt)pt.onclick=function(){
-      var pw=$('pwdFormWrap');
-      if(pw){pw.className='pwd-form';if(li)setTimeout(function(){try{li.focus();}catch(e){}},100);}
-      if(bioBtn)bioBtn.style.display='none';
-      if(bioHint)bioHint.style.display='none';
-      if(pt)pt.style.display='none';
+    if(pt)pt.onclick=function(ev){
+      if(ev)ev.stopPropagation();
+      state.showPwdForm=true;
+      renderLock();
     };
+    return;
   }
+
+  /* ===== 主密码模式 ===== */
+  lt.textContent='输入主密码';
+  ls.textContent=useBio?'或返回使用指纹解锁':'解锁你的保险箱';
+  var backLink=useBio?'<div class="pwd-toggle-link" id="backBioBtn">'+I.finger+' 返回指纹解锁</div>':'';
+  lf.innerHTML=
+    '<input type="password" id="lockInput" class="lock-input" placeholder="主密码">'
+    +'<button class="lock-btn" id="lockBtn">解锁</button>'
+    +backLink
+    +'<div class="lock-forgot" id="forgotBtn">忘记主密码？</div>';
+
+  var btn2=$('lockBtn');
+  if(btn2)btn2.onclick=function(ev){
+    if(ev)ev.stopPropagation();
+    var p=$('lockInput').value;
+    if(simpleHash(p)===state.masterHash){unlock();}
+    else{le.textContent='主密码错误';try{$('lockInput').value='';$('lockInput').focus();}catch(e){}}
+  };
+  var li=$('lockInput');
+  if(li){
+    setTimeout(function(){try{li.focus();}catch(e){}},300);
+    li.onkeydown=function(ev){if(ev.key==='Enter'){try{$('lockBtn').click();}catch(e){}}};
+    li.addEventListener('click',function(ev){ev.stopPropagation();});
+  }
+  var back=$('backBioBtn');
+  if(back)back.onclick=function(ev){
+    if(ev)ev.stopPropagation();
+    state.showPwdForm=false;
+    renderLock();
+  };
+  var fb=$('forgotBtn');
+  if(fb)fb.onclick=function(ev){
+    if(ev)ev.stopPropagation();
+    askConfirm('清空所有数据？','忘记主密码将无法恢复。继续将清空所有密码并重置保险箱。',function(){
+      store.remove(KEY_ITEMS);store.remove(KEY_MASTER);store.remove(KEY_TRASH);store.remove(KEY_BIO);
+      state.items=[];state.trash=[];state.masterHash=null;
+      state.bioEnabled=false;state.bioCredId=null;state.showPwdForm=false;
+      state.firstSetup=true;renderLock();
+    });
+  };
+}
+
+/* 首次创建后的指纹引导 */
+function showBioSetupGuide(){
+  var lt=$('lockTitle'),ls=$('lockSub'),le=$('lockErr'),lf=$('lockForm'),lsc=$('lockScreen');
+  if(lsc)lsc.onclick=null;
+  le.textContent='';
+  lt.textContent='开启指纹解锁';
+  ls.textContent='下次打开即可一触进入';
+  lf.innerHTML=
+    '<button class="bio-btn" id="bioBtn" type="button">'+I.finger+'</button>'
+    +'<div class="bio-hint" id="bioHint">点击指纹图标完成设置</div>'
+    +'<button class="lock-btn" id="skipBioBtn" style="margin-top:16px;background:rgba(255,255,255,.08);color:#94a3b8">暂不开启，使用主密码</button>';
+
+  var bioBtn=$('bioBtn'),bioHint=$('bioHint');
+  if(bioBtn)bioBtn.onclick=function(ev){
+    if(ev)ev.stopPropagation();
+    bioBtn.className='bio-btn loading';
+    if(bioHint){bioHint.className='bio-hint';bioHint.textContent='正在设置指纹...';}
+    registerBiometric().then(function(res){
+      if(res.ok){
+        state.bioEnabled=true;state.bioCredId=res.credId;
+        saveBio();
+        toast('指纹解锁已开启');
+        unlock();
+      }else{
+        bioBtn.className='bio-btn error';
+        if(bioHint){bioHint.className='bio-hint error';bioHint.textContent=res.reason||'设置失败';}
+        setTimeout(function(){
+          bioBtn.className='bio-btn';
+          if(bioHint){bioHint.className='bio-hint';bioHint.textContent='点击指纹图标完成设置';}
+        },2000);
+      }
+    });
+  };
+  var skip=$('skipBioBtn');
+  if(skip)skip.onclick=function(ev){
+    if(ev)ev.stopPropagation();
+    toast('可在设置中随时开启指纹');
+    unlock();
+  };
 }
 
 function unlock(){
@@ -1042,23 +1037,22 @@ function unlock(){
 function lock(){
   if(state.firstSetup)return;
   closeAllDrawers();closeConfirm();
-  state.locked=true;vClear();clearSelection();state.batchMode=false;state.showPwdForm=false;
+  state.locked=true;vClear();clearSelection();state.batchMode=false;
+  state.showPwdForm=false;  // 每次锁屏默认回到指纹模式
   for(var k in state.totpIntervals){if(state.totpIntervals.hasOwnProperty(k)){clearInterval(state.totpIntervals[k]);}}
   state.totpIntervals={};
   try{$('lockScreen').className='lock-screen';}catch(e){}
   renderLock();
 }
 
-/* ========== 指纹开关（设置里调用） ========== */
+/* ========== 指纹开关 ========== */
 function enableBioFromSettings(){
   if(!bioDiag.ok){toast(bioDiag.reason||'当前环境不支持指纹');return;}
   if(!platformAuthAvailable){
-    // 异步再查一次
     try{
       PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().then(function(v){
         if(!v){toast('设备未录入指纹或不支持');return;}
-        platformAuthAvailable=true;
-        doRegister();
+        platformAuthAvailable=true;doRegister();
       }).catch(function(){toast('检测设备指纹失败');});
     }catch(e){toast('检测设备指纹失败');}
     return;
@@ -1069,21 +1063,16 @@ function doRegister(){
   toast('请在系统弹窗中验证指纹');
   registerBiometric().then(function(res){
     if(res.ok){
-      state.bioEnabled=true;state.bioCredId=res.credId;
-      saveBio();
-      toast('指纹解锁已开启');
-      renderSettings();
+      state.bioEnabled=true;state.bioCredId=res.credId;saveBio();
+      toast('指纹解锁已开启');renderSettings();
     }else{
-      toast(res.reason||'开启失败');
-      renderSettings();
+      toast(res.reason||'开启失败');renderSettings();
     }
   });
 }
 function disableBio(){
-  state.bioEnabled=false;state.bioCredId=null;
-  saveBio();
-  toast('指纹解锁已关闭');
-  renderSettings();
+  state.bioEnabled=false;state.bioCredId=null;saveBio();
+  toast('指纹解锁已关闭');renderSettings();
 }
 
 /* ========== Tab ========== */
@@ -1119,18 +1108,13 @@ function renderChips(){
 }
 function renderRecent(){
   try{
-    var recent=[];
-    for(var i=0;i<state.items.length;i++){if(state.items[i].lastUsedAt>0)recent.push(state.items[i]);}
+    var recent=[];for(var i=0;i<state.items.length;i++){if(state.items[i].lastUsedAt>0)recent.push(state.items[i]);}
     recent.sort(function(a,b){return b.lastUsedAt-a.lastUsedAt;});
-    var section=$('recentSection'),scroll=$('recentScroll');
-    if(!section||!scroll)return;
+    var section=$('recentSection'),scroll=$('recentScroll');if(!section||!scroll)return;
     if(recent.length===0){section.className='recent-section';return;}
     section.className='recent-section show';
     var html='';var lim=Math.min(recent.length,6);
-    for(var j=0;j<lim;j++){
-      var it=recent[j];var cat=CAT_MAP[it.cat]||CAT_MAP.other;
-      html+='<div class="recent-chip" data-id="'+it.id+'"><div class="rc-avatar '+cat.cls+'">'+esc(cat.label.charAt(0))+'</div><div class="rc-name">'+esc(it.service)+'</div></div>';
-    }
+    for(var j=0;j<lim;j++){var it=recent[j];var cat=CAT_MAP[it.cat]||CAT_MAP.other;html+='<div class="recent-chip" data-id="'+it.id+'"><div class="rc-avatar '+cat.cls+'">'+esc(cat.label.charAt(0))+'</div><div class="rc-name">'+esc(it.service)+'</div></div>';}
     scroll.innerHTML=html;
     var chips=scroll.getElementsByClassName('recent-chip');
     for(var c=0;c<chips.length;c++){chips[c].onclick=function(){openDetail(this.getAttribute('data-id'));};}
@@ -1143,7 +1127,6 @@ function renderList(){
     var bar=$('batchBar');if(bar)bar.className='batch-bar'+(state.batchMode?' show':'');
     var bc=$('bbCount');if(bc)bc.textContent='已选 '+selectedCount()+' 项';
     renderRecent();
-
     var list=[];
     for(var i=0;i<state.items.length;i++){
       var x=state.items[i];
@@ -1166,14 +1149,12 @@ function renderList(){
       if(sortBy==='used')return (b.lastUsedAt||0)-(a.lastUsedAt||0);
       return b.updatedAt-a.updatedAt;
     });
-
     var el=$('vaultList');
     if(list.length===0){
       if(state.items.length===0)el.innerHTML='<div class="empty"><div class="empty-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="empty-title">保险箱是空的</div><div class="empty-desc">点击下方 + 按钮，添加你的第一个密码</div></div>';
       else el.innerHTML='<div class="empty"><div class="empty-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><div class="empty-title">没有匹配结果</div><div class="empty-desc">试试其他关键词或筛选条件</div></div>';
       return;
     }
-
     var html='';
     for(var j=0;j<list.length;j++){
       var it=list[j];var isV=vHas(it.id);var st=pwdStrength(it.pwd);var cat=CAT_MAP[it.cat]||CAT_MAP.other;
@@ -1187,15 +1168,12 @@ function renderList(){
         +'<div class="card-meta"><div class="card-service">'+esc(it.service)+'</div><div class="card-user">'+meta+'<span class="sep"></span>'+timeAgo(it.updatedAt)+'</div></div>'
         +'<button class="star-btn'+(it.favorite?' active':'')+'" data-act="star" data-id="'+it.id+'">'+I.star+'</button>'
         +'</div>'
-        +'<div class="card-pwd">'
-        +'<span class="pwd-text'+(isV?' visible':'')+'">'+pwdShow+'</span>'
+        +'<div class="card-pwd"><span class="pwd-text'+(isV?' visible':'')+'">'+pwdShow+'</span>'
         +'<div class="strength s'+st+'"><i></i><i></i><i></i></div>'
         +'<button class="mini-btn" data-act="toggle" data-id="'+it.id+'">'+(isV?I.eyeOff:I.eye)+'</button>'
-        +'<button class="mini-btn" data-act="copy" data-id="'+it.id+'">'+I.copy+'</button>'
-        +'</div></div>';
+        +'<button class="mini-btn" data-act="copy" data-id="'+it.id+'">'+I.copy+'</button></div></div>';
     }
     el.innerHTML=html;
-
     var cards=el.getElementsByClassName('card');
     for(var a=0;a<cards.length;a++){
       (function(card){
@@ -1210,8 +1188,7 @@ function renderList(){
             else if(act==='star'){toggleFavorite(id);}
             return;
           }
-          if(state.batchMode){toggleSelect(id);renderList();}
-          else{openDetail(id);}
+          if(state.batchMode){toggleSelect(id);renderList();}else{openDetail(id);}
         };
       })(cards[a]);
     }
@@ -1225,26 +1202,21 @@ function renderGenerator(){
   try{
     var pwd=state.genPwd;var el=$('genPwd');
     if(el)el.textContent=pwd||'点击下方按钮生成';
-    var strEl=$('genStrength');
-    if(strEl){if(pwd)strEl.className='gen-strength s'+pwdStrength(pwd);else strEl.className='gen-strength';}
+    var strEl=$('genStrength');if(strEl){if(pwd)strEl.className='gen-strength s'+pwdStrength(pwd);else strEl.className='gen-strength';}
     var lv=$('genLenVal');if(lv)lv.textContent=state.genLen;
     var sl=$('genLen');if(sl)sl.value=state.genLen;
     var rows=document.querySelectorAll('.toggle-row');
     for(var i=0;i<rows.length;i++){var opt=rows[i].getAttribute('data-opt');rows[i].className=state.genOpts[opt]?'toggle-row on':'toggle-row';}
   }catch(e){}
 }
-function generateNew(){
-  var pwd=genPwd(state.genLen,state.genOpts);state.genPwd=pwd;renderGenerator();
-  try{var el=$('genPwd');if(el){el.className='gen-pwd pulse';setTimeout(function(){try{el.className='gen-pwd';}catch(e){}},500);}}catch(e){}
-}
+function generateNew(){var pwd=genPwd(state.genLen,state.genOpts);state.genPwd=pwd;renderGenerator();try{var el=$('genPwd');if(el){el.className='gen-pwd pulse';setTimeout(function(){try{el.className='gen-pwd';}catch(e){}},500);}}catch(e){}}
 
 /* ========== 安全中心 ========== */
 function renderSecurity(){
   try{
     var total=state.items.length;
     var weak=[],dupGroups=[],old=[],fav=[];var pwdMap={};var expireMs=state.settings.expireDays*864e5;var catCount={};
-    for(var i=0;i<state.items.length;i++){
-      var x=state.items[i];
+    for(var i=0;i<state.items.length;i++){var x=state.items[i];
       if(pwdStrength(x.pwd)===1)weak.push(x);
       if(x.favorite)fav.push(x);
       if(Date.now()-x.updatedAt>expireMs)old.push(x);
@@ -1257,7 +1229,6 @@ function renderSecurity(){
     var scoreColor=score>=80?'#34d399':score>=55?'#fbbf24':'#f43f5e';
     var scoreText=score>=80?'非常安全':score>=55?'需要关注':'存在风险';
     var circ=2*3.14159*46;
-
     var html='<div class="score-card">'
       +'<div class="score-ring"><svg viewBox="0 0 110 110"><circle class="ring-bg" cx="55" cy="55" r="46"/><circle class="ring-fg" cx="55" cy="55" r="46" id="ringFg" stroke="'+scoreColor+'" stroke-dasharray="'+circ+'" stroke-dashoffset="'+circ+'"/></svg>'
       +'<div class="score-center"><div class="score-num" style="color:'+scoreColor+'">'+score+'</div><div class="score-label">安全评分</div></div></div>'
@@ -1267,33 +1238,24 @@ function renderSecurity(){
       +'<div class="deduction-item"><span>重复使用</span><span class="dv '+(dedDup>0?'warn':'ok')+'">-'+(dedDup||0)+'</span></div>'
       +'<div class="deduction-item"><span>过期未更新</span><span class="dv '+(dedOld>0?'warn':'ok')+'">-'+(dedOld||0)+'</span></div>'
       +'</div></div></div>';
-
     var hasAny=false;for(var cc in catCount){if(catCount.hasOwnProperty(cc)&&catCount[cc]>0){hasAny=true;break;}}
     if(hasAny){
       html+='<div class="dist-card"><h4><span>分类分布</span><span style="color:var(--txt-3);font-weight:500">'+total+' 个</span></h4>';
       var distColors={social:'#8b5cf6',mail:'#3b82f6',bank:'#10b981',shop:'#f59e0b',work:'#06b6d4',other:'#64748b'};
       var catOrder=['social','mail','bank','shop','work','other'];
-      for(var oi=0;oi<catOrder.length;oi++){
-        var catId=catOrder[oi];var cnt=catCount[catId]||0;if(cnt===0)continue;
-        var cm=CAT_MAP[catId];var pct=Math.round(cnt/total*100);
-        html+='<div class="dist-row"><div class="dist-label">'+cm.label+'</div><div class="dist-bar-wrap"><div class="dist-bar" style="width:'+pct+'%;background:'+distColors[catId]+'"></div></div><div class="dist-value">'+cnt+'</div></div>';
-      }
+      for(var oi=0;oi<catOrder.length;oi++){var catId=catOrder[oi];var cnt=catCount[catId]||0;if(cnt===0)continue;var cm=CAT_MAP[catId];var pct=Math.round(cnt/total*100);html+='<div class="dist-row"><div class="dist-label">'+cm.label+'</div><div class="dist-bar-wrap"><div class="dist-bar" style="width:'+pct+'%;background:'+distColors[catId]+'"></div></div><div class="dist-value">'+cnt+'</div></div>';}
       html+='</div>';
     }
-
     html+='<div class="stat-grid">'
       +'<div class="stat-item"><div class="sv" style="color:var(--txt-1)">'+total+'</div><div class="sl">全部</div></div>'
       +'<div class="stat-item t-ok"><div class="sv">'+(total-weak.length)+'</div><div class="sl">强/中</div></div>'
       +'<div class="stat-item t-bad"><div class="sv">'+weak.length+'</div><div class="sl">弱密码</div></div>'
       +'<div class="stat-item t-fav"><div class="sv">'+fav.length+'</div><div class="sl">收藏</div></div>'
       +'</div>';
-
     html+=buildIssue('弱密码','danger',I.warn,weak.length,mapIssue(weak,'建议立即更换'));
-    var dupFlat=[];
-    for(var d=0;d<dupGroups.length;d++){for(var dd=0;dd<dupGroups[d].length;dd++){dupFlat.push({id:dupGroups[d][dd].id,name:dupGroups[d][dd].service,sub:'重复密码组（'+dupGroups[d].length+'个）',cat:dupGroups[d][dd].cat});}}
+    var dupFlat=[];for(var d=0;d<dupGroups.length;d++){for(var dd=0;dd<dupGroups[d].length;dd++){dupFlat.push({id:dupGroups[d][dd].id,name:dupGroups[d][dd].service,sub:'重复密码组（'+dupGroups[d].length+'个）',cat:dupGroups[d][dd].cat});}}
     html+=buildIssue('重复使用的密码','warn',I.dup,dupFlat.length,dupFlat);
     html+=buildIssue('超过 '+state.settings.expireDays+' 天未更新','info',I.clock,old.length,mapIssue(old,'建议定期更换'));
-
     $('securityPage').innerHTML=html;
     setTimeout(function(){try{var r=$('ringFg');if(r)r.setAttribute('stroke-dashoffset',circ*(1-score/100));}catch(e){}},100);
     var heads=$('securityPage').getElementsByClassName('issue-head');
@@ -1310,15 +1272,12 @@ function buildIssue(title,type,icon,count,items){
   return '<div class="issue-group"><div class="issue-head"><div class="issue-icon '+type+'">'+icon+'</div><h4>'+title+'</h4><span class="count">'+count+'</span></div><div class="issue-body">'+body+'</div></div>';
 }
 
-/* ========== 设置（含指纹开关） ========== */
+/* ========== 设置 ========== */
 function renderSettings(){
   try{
     var lockLabels={0:'从不',1:'1 分钟',5:'5 分钟',15:'15 分钟',30:'30 分钟'};
     var alVal=lockLabels[state.settings.autoLockMin]||(state.settings.autoLockMin+' 分钟');
-    var expVal=state.settings.expireDays+' 天';var theme=state.settings.theme;
-    var trashCount=state.trash.length;
-
-    // 指纹项
+    var expVal=state.settings.expireDays+' 天';var theme=state.settings.theme;var trashCount=state.trash.length;
     var bioItemHtml='';
     if(bioDiag.ok){
       var isOn=state.bioEnabled&&state.bioCredId;
@@ -1326,10 +1285,9 @@ function renderSettings(){
         +'<div class="si-text">指纹解锁<div class="si-sub">'+(isOn?'已开启，下次打开用指纹':'使用系统指纹快速解锁')+'</div></div>'
         +'<div class="switch-mini'+(isOn?' on':'')+'"></div></div>';
     }else{
-      bioItemHtml='<div class="set-item disabled" id="setBioDisabled"><div class="si-icon">'+I.finger+'</div>'
+      bioItemHtml='<div class="set-item disabled"><div class="si-icon">'+I.finger+'</div>'
         +'<div class="si-text">指纹解锁<div class="si-sub">'+esc(bioDiag.reason)+'</div></div></div>';
     }
-
     $('settingsPage').innerHTML=''
       +'<div class="set-group"><div class="set-group-title">外观</div><div class="theme-switch">'
       +'<button class="theme-btn'+(theme==='dark'?' active':'')+'" data-theme="dark"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>深色</button>'
@@ -1347,26 +1305,18 @@ function renderSettings(){
       +'<div class="set-item" id="setImport"><div class="si-icon success">'+I.upload+'</div><div class="si-text">导入备份</div></div>'
       +'<div class="set-item danger" id="setClear"><div class="si-icon danger">'+I.del+'</div><div class="si-text">清空所有数据</div></div>'
       +'</div>'
-      +'<div class="about"><b>密码保险箱 v12.0 Pro</b><br>AES-256-GCM 本地加密 · WebAuthn 指纹<br>数据仅保存在本机浏览器 · 不会上传</div>';
-
+      +'<div class="about"><b>密码保险箱 v13.0 Pro</b><br>AES-256-GCM · WebAuthn 默认指纹解锁<br>数据仅保存在本机浏览器 · 不会上传</div>';
     var tbtns=document.querySelectorAll('.theme-btn');
     for(var t=0;t<tbtns.length;t++){tbtns[t].onclick=function(){applyTheme(this.getAttribute('data-theme'));renderSettings();};}
-
     $('setChangeMaster').onclick=function(){openFormDrawer('editMaster');};
-
-    // 指纹开关
     if(bioDiag.ok){
       var bioEl=$('setBio');
       if(bioEl)bioEl.onclick=function(){
         var isOn=state.bioEnabled&&state.bioCredId;
-        if(isOn){
-          askConfirm('关闭指纹解锁？','关闭后只能使用主密码解锁。',disableBio);
-        }else{
-          enableBioFromSettings();
-        }
+        if(isOn){askConfirm('关闭指纹解锁？','关闭后只能使用主密码解锁。',disableBio);}
+        else{enableBioFromSettings();}
       };
     }
-
     $('setAutoLock').onclick=function(){
       var opts=[0,1,5,15,30];var idx=opts.indexOf(state.settings.autoLockMin);if(idx===-1)idx=2;
       var next=opts[(idx+1)%opts.length];state.settings.autoLockMin=next;saveSettings();renderSettings();toast('自动锁定：'+(lockLabels[next]||next+' 分钟'));
@@ -1379,7 +1329,9 @@ function renderSettings(){
     $('setExport').onclick=function(){$('exportText').value='';$('exportPass').value='';openDrawer($('exportDrawer'));};
     $('setImport').onclick=function(){$('importText').value='';$('importPass').value='';openDrawer($('importDrawer'));};
     $('setClear').onclick=function(){
-      askConfirm('清空所有数据？','这将永久删除所有密码记录，且无法恢复。',function(){state.items=[];state.trash=[];saveItems();saveTrash();toast('所有数据已清空');switchTab('settings');});
+      askConfirm('清空所有数据？','这将永久删除所有密码记录，且无法恢复。',function(){
+        state.items=[];state.trash=[];saveItems();saveTrash();toast('所有数据已清空');switchTab('settings');
+      });
     };
   }catch(e){console.error('renderSettings',e);}
 }
@@ -1450,7 +1402,6 @@ function saveForm(){
     if(!user){toast('请输入账号');return;}
     if(!pwd){toast('请输入密码');return;}
     if(pwd.length<4){toast('密码太短了');return;}
-
     if(state.editingId){
       for(var k=0;k<state.items.length;k++){
         if(state.items[k].id===state.editingId){
@@ -1491,18 +1442,11 @@ function openDetail(id){
     it.lastUsedAt=Date.now();saveItems();if(state.tab==='vault')renderList();
     var cat=CAT_MAP[it.cat]||CAT_MAP.other;var isV=vHas(it.id);var st=pwdStrength(it.pwd);var an=pwdAnalysis(it.pwd);
     var pwdDisplay=isV?esc(it.pwd):new Array(Math.min(it.pwd.length,20)+1).join('•');
-
-    var html='<div class="detail-hero">'
-      +'<div class="detail-avatar '+cat.cls+'">'+esc(cat.label.charAt(0))+'</div>'
+    var html='<div class="detail-hero"><div class="detail-avatar '+cat.cls+'">'+esc(cat.label.charAt(0))+'</div>'
       +'<div class="detail-hero-text"><h2>'+esc(it.service)+'</h2><p><span>'+cat.label+'</span><span style="width:3px;height:3px;border-radius:50%;background:var(--txt-3);display:inline-block"></span><span>'+timeAgo(it.updatedAt)+'更新</span>'+(it.favorite?'<span style="color:#fbbf24">★</span>':'')+'</p></div></div>';
-
     html+='<div class="detail-block"><div class="db-body"><div class="db-label">账号</div><div class="db-value">'+(esc(it.user)||'—')+'</div></div><button class="mini-btn" data-act="copyUser">'+I.copy+'</button></div>';
     html+='<div class="detail-block"><div class="db-body"><div class="db-label">密码 <span class="strength s'+st+'" style="display:inline-flex;margin-left:6px;vertical-align:middle"><i></i><i></i><i></i></span></div><div class="db-value mono">'+pwdDisplay+'</div></div><button class="mini-btn" data-act="toggle">'+(isV?I.eyeOff:I.eye)+'</button><button class="mini-btn" data-act="copyPwd">'+I.copy+'</button></div>';
-
-    if(it.note){
-      html+='<div class="detail-block" style="flex-direction:column;align-items:stretch"><div class="db-label">备注</div><div class="db-value" style="font-weight:400;font-size:.82rem;color:var(--txt-2);line-height:1.5;white-space:pre-wrap">'+esc(it.note)+'</div></div>';
-    }
-
+    if(it.note){html+='<div class="detail-block" style="flex-direction:column;align-items:stretch"><div class="db-label">备注</div><div class="db-value" style="font-weight:400;font-size:.82rem;color:var(--txt-2);line-height:1.5;white-space:pre-wrap">'+esc(it.note)+'</div></div>';}
     html+='<div class="detail-block" style="flex-direction:column;align-items:stretch"><div class="db-label">密码强度分析</div><div class="analysis-row">'
       +'<div class="analysis-item '+(an.len>=8?'ok':'no')+'"><div class="av">'+an.len+'</div><div class="al">长度</div></div>'
       +'<div class="analysis-item '+(an.hasLower?'ok':'no')+'"><div class="av">'+(an.hasLower?'✓':'✗')+'</div><div class="al">小写</div></div>'
@@ -1510,38 +1454,20 @@ function openDetail(id){
       +'<div class="analysis-item '+(an.hasNumber?'ok':'no')+'"><div class="av">'+(an.hasNumber?'✓':'✗')+'</div><div class="al">数字</div></div>'
       +'<div class="analysis-item '+(an.hasSymbol?'ok':'no')+'"><div class="av">'+(an.hasSymbol?'✓':'✗')+'</div><div class="al">符号</div></div>'
       +'</div></div>';
-
-    if(it.totp){
-      html+='<div class="detail-block" style="flex-direction:column;align-items:stretch"><div class="db-label">二次验证码 TOTP</div><div class="totp-code" id="totpCode-'+it.id+'">------</div><div class="totp-timer"><span id="totpTimer-'+it.id+'" style="width:100%"></span></div></div>';
-    }
-
-    if(it.history&&it.history.length>0){
-      html+='<div class="detail-block" style="flex-direction:column;align-items:stretch"><div class="db-label">密码修改历史</div>';
-      for(var h=0;h<it.history.length;h++){html+='<div class="history-item"><div class="h-time">'+new Date(it.history[h].changedAt).toLocaleString()+'</div><div class="h-pwd">'+esc(it.history[h].pwd)+'</div></div>';}
-      html+='</div>';
-    }
-
+    if(it.totp){html+='<div class="detail-block" style="flex-direction:column;align-items:stretch"><div class="db-label">二次验证码 TOTP</div><div class="totp-code" id="totpCode-'+it.id+'">------</div><div class="totp-timer"><span id="totpTimer-'+it.id+'" style="width:100%"></span></div></div>';}
+    if(it.history&&it.history.length>0){html+='<div class="detail-block" style="flex-direction:column;align-items:stretch"><div class="db-label">密码修改历史</div>';for(var h=0;h<it.history.length;h++){html+='<div class="history-item"><div class="h-time">'+new Date(it.history[h].changedAt).toLocaleString()+'</div><div class="h-pwd">'+esc(it.history[h].pwd)+'</div></div>';}html+='</div>';}
     html+='<div class="detail-block" style="flex-direction:column;align-items:stretch;gap:5px"><div style="display:flex;justify-content:space-between;font-size:.68rem;color:var(--txt-3)"><span>创建时间</span><span>'+new Date(it.createdAt).toLocaleString()+'</span></div><div style="display:flex;justify-content:space-between;font-size:.68rem;color:var(--txt-3)"><span>最后更新</span><span>'+new Date(it.updatedAt).toLocaleString()+'</span></div></div>';
-
     html+='<div class="detail-actions"><button class="btn-fav" id="detailFav">'+I.star+' '+(it.favorite?'取消收藏':'收藏')+'</button><button class="btn-edit" id="detailEdit">'+I.edit+' 编辑</button><button class="btn-del" id="detailDel">'+I.del+'</button></div>';
-
     $('detailBody').innerHTML=html;
-
     if(it.totp){
       if(state.totpIntervals[it.id])clearInterval(state.totpIntervals[it.id]);
       var updateTotp=function(){
         var codeEl=$('totpCode-'+it.id);var timerEl=$('totpTimer-'+it.id);if(!codeEl)return;
-        generateTOTP(it.totp,30).then(function(code){
-          if(code)codeEl.textContent=code.substring(0,3)+' '+code.substring(3);
-          else codeEl.textContent='密钥无效';
-        });
-        var epoch=Math.floor(Date.now()/1000);var remain=30-(epoch%30);
-        if(timerEl)timerEl.style.width=(remain/30*100)+'%';
+        generateTOTP(it.totp,30).then(function(code){if(code)codeEl.textContent=code.substring(0,3)+' '+code.substring(3);else codeEl.textContent='密钥无效';});
+        var epoch=Math.floor(Date.now()/1000);var remain=30-(epoch%30);if(timerEl)timerEl.style.width=(remain/30*100)+'%';
       };
-      updateTotp();
-      state.totpIntervals[it.id]=setInterval(updateTotp,1000);
+      updateTotp();state.totpIntervals[it.id]=setInterval(updateTotp,1000);
     }
-
     var acts=$('detailBody').getElementsByClassName('mini-btn');
     for(var a=0;a<acts.length;a++){
       acts[a].onclick=function(){
@@ -1558,8 +1484,7 @@ function openDetail(id){
         var target=null;var newItems=[];
         for(var i=0;i<state.items.length;i++){if(state.items[i].id===it.id)target=state.items[i];else newItems.push(state.items[i]);}
         if(target){target.deletedAt=Date.now();state.trash.push(target);saveTrash();}
-        state.items=newItems;vDel(it.id);saveItems();
-        closeDrawer($('detailDrawer'));toast('已移入回收站');switchTab(state.tab);
+        state.items=newItems;vDel(it.id);saveItems();closeDrawer($('detailDrawer'));toast('已移入回收站');switchTab(state.tab);
       });
     };
     openDrawer($('detailDrawer'));
@@ -1604,17 +1529,9 @@ function exitBatchMode(){state.batchMode=false;clearSelection();renderList();}
 
 function openDrawer(el){try{$('overlay').className='overlay open';el.className='drawer open';}catch(e){}}
 function closeDrawer(el){try{el.className='drawer';}catch(e){}}
-function closeAllDrawers(){
-  try{$('overlay').className='overlay';$('formDrawer').className='drawer';$('detailDrawer').className='drawer';$('importDrawer').className='drawer';$('exportDrawer').className='drawer';$('trashDrawer').className='drawer';}catch(e){}
-}
-function askConfirm(title,text,onYes){
-  try{$('confirmTitle').textContent=title;$('confirmText').textContent=text;$('confirmDialog').className='confirm open';$('overlay').className='overlay open';state.pendingConfirm=onYes;}catch(e){}
-}
-function closeConfirm(){
-  try{$('confirmDialog').className='confirm';
-    if($('formDrawer').className.indexOf('open')===-1&&$('detailDrawer').className.indexOf('open')===-1&&$('importDrawer').className.indexOf('open')===-1&&$('exportDrawer').className.indexOf('open')===-1&&$('trashDrawer').className.indexOf('open')===-1)$('overlay').className='overlay';
-    state.pendingConfirm=null;}catch(e){}
-}
+function closeAllDrawers(){try{$('overlay').className='overlay';$('formDrawer').className='drawer';$('detailDrawer').className='drawer';$('importDrawer').className='drawer';$('exportDrawer').className='drawer';$('trashDrawer').className='drawer';}catch(e){}}
+function askConfirm(title,text,onYes){try{$('confirmTitle').textContent=title;$('confirmText').textContent=text;$('confirmDialog').className='confirm open';$('overlay').className='overlay open';state.pendingConfirm=onYes;}catch(e){}}
+function closeConfirm(){try{$('confirmDialog').className='confirm';if($('formDrawer').className.indexOf('open')===-1&&$('detailDrawer').className.indexOf('open')===-1&&$('importDrawer').className.indexOf('open')===-1&&$('exportDrawer').className.indexOf('open')===-1&&$('trashDrawer').className.indexOf('open')===-1)$('overlay').className='overlay';state.pendingConfirm=null;}catch(e){}}
 
 function touchActivity(){state.lastActivity=Date.now();}
 
@@ -1622,11 +1539,8 @@ function touchActivity(){state.lastActivity=Date.now();}
 function doExport(){
   var pass=$('exportPass').value;
   if(pass.length<6){toast('导出密码至少 6 位');return;}
-  var plaintext=JSON.stringify({app:'密码保险箱',version:12,exportedAt:new Date().toISOString(),items:state.items});
-  if(!hasCrypto){
-    if(confirm('当前环境不支持 Web Crypto，将导出明文 JSON。继续？')){$('exportText').value=plaintext;toast('已生成明文备份');}
-    return;
-  }
+  var plaintext=JSON.stringify({app:'密码保险箱',version:13,exportedAt:new Date().toISOString(),items:state.items});
+  if(!hasCrypto){if(confirm('当前环境不支持 Web Crypto，将导出明文 JSON。继续？')){$('exportText').value=plaintext;toast('已生成明文备份');}return;}
   aesEncrypt(plaintext,pass).then(function(c){$('exportText').value=c;toast('加密备份已生成');}).catch(function(){toast('加密失败');});
 }
 function doImport(){
@@ -1635,10 +1549,7 @@ function doImport(){
     var parsed=null;try{parsed=JSON.parse(text);}catch(e){}
     if(parsed&&parsed.items){importItems(parsed.items);return;}
     var pwd=$('importPass').value;if(!pwd){toast('请输入备份密码');return;}
-    aesDecrypt(text,pwd).then(function(plain){
-      var data=JSON.parse(plain);
-      if(data&&data.items)importItems(data.items);else toast('备份格式不正确');
-    }).catch(function(){toast('解密失败：密码错误或备份损坏');});
+    aesDecrypt(text,pwd).then(function(plain){var data=JSON.parse(plain);if(data&&data.items)importItems(data.items);else toast('备份格式不正确');}).catch(function(){toast('解密失败：密码错误或备份损坏');});
   }catch(e){toast('解析失败');}
 }
 function importItems(arr){
@@ -1658,8 +1569,7 @@ function importItems(arr){
 function init(){
   setProgress('正在读取数据...');loadAll();
   setProgress('正在应用主题...');applyTheme(state.settings.theme||'dark');
-  setProgress('正在检测指纹...');
-  checkPlatformAuth();
+  setProgress('正在检测指纹...');checkPlatformAuth();
   setProgress('正在渲染界面...');renderLock();
 
   try{var evts=['click','touchstart','keydown','input'];for(var e=0;e<evts.length;e++)document.addEventListener(evts[e],touchActivity,false);}catch(e){}
@@ -1667,7 +1577,6 @@ function init(){
   try{var si=$('searchInput');if(si)si.oninput=function(){state.keyword=this.value.trim();renderList();};}catch(e){}
   try{var ss=$('sortSelect');if(ss)ss.onchange=function(){state.sortBy=this.value;renderList();};}catch(e){}
   try{var sf=$('starFilterBtn');if(sf)sf.onclick=function(){state.starFilter=!state.starFilter;renderList();};}catch(e){}
-
   try{
     $('batchBtn').onclick=function(){if(state.batchMode)exitBatchMode();else enterBatchMode();};
     $('bbCancel').onclick=exitBatchMode;
@@ -1676,20 +1585,14 @@ function init(){
       var cnt=selectedCount();if(cnt===0){toast('请先选择项目');return;}
       askConfirm('移入回收站？','将移除 '+cnt+' 条记录（30 天内可恢复）。',function(){
         var newItems=[];
-        for(var i=0;i<state.items.length;i++){
-          if(isSelected(state.items[i].id)){state.items[i].deletedAt=Date.now();state.trash.push(state.items[i]);}
-          else newItems.push(state.items[i]);
-        }
-        state.items=newItems;clearSelection();state.batchMode=false;saveItems();saveTrash();
-        toast('已移入回收站 '+cnt+' 条');switchTab('vault');
+        for(var i=0;i<state.items.length;i++){if(isSelected(state.items[i].id)){state.items[i].deletedAt=Date.now();state.trash.push(state.items[i]);}else newItems.push(state.items[i]);}
+        state.items=newItems;clearSelection();state.batchMode=false;saveItems();saveTrash();toast('已移入回收站 '+cnt+' 条');switchTab('vault');
       });
     };
   }catch(e){}
-
   try{$('fab').onclick=function(){openFormDrawer('add');};}catch(e){}
   try{$('lockNowBtn').onclick=function(){lock();};}catch(e){}
   try{$('themeToggleBtn').onclick=function(){applyTheme(state.settings.theme==='dark'?'light':'dark');if(state.tab==='settings')renderSettings();};}catch(e){}
-
   try{
     $('genLen').oninput=function(){state.genLen=parseInt(this.value,10)||16;try{$('genLenVal').textContent=state.genLen;}catch(e){}};
     var rows=document.querySelectorAll('.toggle-row');
@@ -1697,7 +1600,6 @@ function init(){
     $('genRefresh').onclick=generateNew;
     $('genCopy').onclick=function(){if(!state.genPwd){toast('请先生成密码');return;}copySecure(state.genPwd,function(ok){toast(ok?'已复制，30 秒后自动清除':'复制失败');});};
   }catch(e){}
-
   try{$('overlay').onclick=function(){if($('confirmDialog').className.indexOf('open')!==-1){closeConfirm();return;}closeAllDrawers();closeConfirm();};}catch(e){}
   try{
     $('confirmNo').onclick=closeConfirm;
@@ -1707,29 +1609,20 @@ function init(){
       state.pendingConfirm=null;if(fn){try{fn();}catch(e){console.error(e);}}
     };
   }catch(e){}
-
   try{$('exportGenBtn').onclick=doExport;}catch(e){}
   try{$('exportCopyBtn').onclick=function(){var v=$('exportText').value;if(!v){toast('请先生成备份');return;}copySecure(v,function(ok){toast(ok?'已复制':'复制失败');});};}catch(e){}
   try{$('doImportBtn').onclick=doImport;}catch(e){}
-
-  try{
-    setInterval(function(){
-      try{if(state.locked||state.firstSetup)return;if(state.settings.autoLockMin===0)return;if(Date.now()-state.lastActivity>state.settings.autoLockMin*60000)lock();}catch(e){}
-    },10000);
-  }catch(e){}
-
+  try{setInterval(function(){try{if(state.locked||state.firstSetup)return;if(state.settings.autoLockMin===0)return;if(Date.now()-state.lastActivity>state.settings.autoLockMin*60000)lock();}catch(e){}},10000);}catch(e){}
   try{
     document.addEventListener('visibilitychange',function(){
       try{
-        if(document.hidden){
-          if(!state.locked&&!state.firstSetup){var pm=$('privacyMask');if(pm)pm.className='privacy-mask show';}
-        }else{var pm2=$('privacyMask');if(pm2)pm2.className='privacy-mask';touchActivity();}
+        if(document.hidden){if(!state.locked&&!state.firstSetup){var pm=$('privacyMask');if(pm)pm.className='privacy-mask show';}}
+        else{var pm2=$('privacyMask');if(pm2)pm2.className='privacy-mask';touchActivity();}
       }catch(e){}
     },false);
   }catch(e){}
-
   setProgress('');
-  try{$('lockSub').textContent=state.firstSetup?'设置主密码（至少 6 位）':(state.bioEnabled?'使用指纹或主密码解锁':'输入主密码解锁');}catch(e){}
+  try{$('lockSub').textContent=state.firstSetup?'设置主密码（至少 6 位）':(state.bioEnabled?'轻触屏幕使用指纹解锁':'输入主密码解锁');}catch(e){}
 }
 
 try{init();}
